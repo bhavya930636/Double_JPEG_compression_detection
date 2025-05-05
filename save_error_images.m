@@ -2,8 +2,8 @@
 addpath('dependencies/jpeg_read_toolbox/')
 addpath('all_needed_matlab_functions/')
 
-dir_path = '../../data_folder/'
-Q_list = [20,40,60,70,75,80,85,90]; %All quality factors reported. 
+dir_path = '../data/'
+Q_list = [20,70,75,80,85,90]; %All quality factors reported. 
 stability_index = 'all';
 
 %if(strcmp(stability_index, '1'))
@@ -50,7 +50,7 @@ for q = 2
             
             single_path = create_img_struct(fullfile([read_single_path ,'/' ,int2str(k)]));
             double_path = create_img_struct(fullfile([read_double_path ,'/' ,int2str(k+1)]));
-            %You're reading paths to single and double JPEG patches 
+            
             if(strcmp(prefix,'train/'))
 
                if(length(single_path)>0)
