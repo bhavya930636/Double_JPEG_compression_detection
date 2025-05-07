@@ -1,82 +1,143 @@
-# Double JPEG Compression Detection
+# UCID DCT Error Analysis and SVM Classification
 
-## Requirements
+This project performs error analysis on JPEG-compressed images using the UCID dataset. It identifies rounding and truncation errors in DCT coefficients, processes them, and trains a Support Vector Machine (SVM) model for classification.
 
-Install dependencies:
+---
+
+## 📁 Folder Structure
 
 ```
+project_root/
+├── *.py                    # Python scripts
+├── *.m                     # MATLAB scripts
+├── data/                   # Expects `ucid.v2` folder here (one level above root)
+└── ...
+```
+
+---
+
+## 📦 Setup Instructions
+
+### 1. Dataset Setup
+
+- Download the **UCID dataset** (e.g., from [here](https://www.essex.ac.uk/news/2010/12/20/ucid-an-image-database)).
+- Place it **outside** the project root directory like so:
+
+```
+../data/ucid.v2/
+```
+
+---
+
+### 2. Install Python Dependencies
+
+Create a `requirements.txt` with the following:
+
+```txt
+numpy
+scipy
+scikit-learn
+matplotlib
+```
+
+Then install using:
+
+```bash
 pip install -r requirements.txt
 ```
 
-## Dataset
-
-Place UCID dataset images under `data/dataset/`.
+> MATLAB is required for intermediate processing steps.
 
 ---
 
-## Step 1: Image Compression
+## 🚀 Running the Pipeline
 
-Convert images to grayscale and apply JPEG compression at multiple levels.
+### Step 1: Generate Grayscale Images
 
-```
+```bash
 python data_maker.py
 ```
 
----
-
-## Step 2: Patch Extraction
-
-Extract stable/unstable 8x8 patches using DCT comparison.
-
-```
-python patch_make.py
-```
+This converts all UCID images to grayscale JPEGs using a specific quality factor.
 
 ---
 
-## Step 3: Feature Extraction (MATLAB)
+### Step 2: Generate Patches
 
-Extract features from each patch and generate error matrices.
+Run `patch_maker.py` **twice**:
 
+```bash
+python patch_maker.py
 ```
-save_error_images
-```
+
+- First with `train=True`
+- Then with `train=False`
+
+Modify the path variable inside the script before each run to ensure correct file I/O.
 
 ---
 
-## Step 4: Convert `.mat` to `.npz`
+### Step 3: MATLAB DCT Error Computation
 
-Convert all `.mat` files to `.npz` files.
+Run this in terminal:
 
+```bash
+matlab -nodisplay -nosplash -r "save_error_images; exit"
 ```
+
+This will:
+
+- Compute error blocks  
+- Extract DCT coefficients  
+- Separate rounding and truncation errors  
+- Save `.mat` files for training and testing  
+
+---
+
+### Step 4: Convert `.mat` to `.npz`
+
+```bash
 python run_all_mat_2_npz.py
 ```
 
+Converts MATLAB `.mat` files to NumPy `.npz` format.
+
 ---
 
-## Step 5: Train SVM Classifier
+### Step 5: Train and Evaluate SVM
 
-Train and evaluate the classifier.
-
-```
+```bash
 python svm.py
 ```
 
----
-
-## Step 6: Visualize Errors
-
-
-Visualize error blocks.
-
-```
-python visualize.py
-```
-
-Plot rounding and truncation error distributions.
-
-```
-python visualize_r_t.py
-```
+Trains an SVM classifier on the error features and evaluates the performance.
 
 ---
+
+### Step 6: Visualization
+
+To save error blocks as images:
+
+```bash
+python visualise.py
+```
+
+To generate plots for rounding and truncation error distributions:
+
+```bash
+python visualise_r_t.py
+```
+
+---
+
+## 📌 Notes
+
+- MATLAB is required for DCT error extraction.
+- Ensure file paths are correctly set in each script before running.
+- Tested with Python 3.8+ and MATLAB R2021b.
+
+---
+
+## 📄 License
+
+This project is intended for academic and research use only.
