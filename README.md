@@ -1,6 +1,6 @@
-# UCID DCT Error Analysis and SVM Classification
+# DOUBLE JPEG COMPRESSION DETECTION FOR DISTINGUISHABLE BLOCKS IN IMAGES COMPRESSED WITH SAME QUANTIZATION MATRIX
 
-This project performs error analysis on JPEG-compressed images using the UCID dataset. It identifies rounding and truncation errors in DCT coefficients, processes them, and trains a Support Vector Machine (SVM) model for classification.
+This project performs error analysis on JPEG-compressed images using the UCID dataset. It identifies rounding and truncation errors in DCT coefficients, processes them, and trains a Support Vector Machine (SVM) model for classification of iamges as double or simple compressed.
 
 ---
 
@@ -8,10 +8,12 @@ This project performs error analysis on JPEG-compressed images using the UCID da
 
 ```
 project_root/
-├── *.py                    # Python scripts
+├── *.py ``                # Python scripts
 ├── *.m                     # MATLAB scripts
-├── data/                   # Expects `ucid.v2` folder here (one level above root)
 └── ...
+
+├── data/                   # Expects `ucid.v2` folder here (level equivalent to root)
+
 ```
 
 ---
@@ -20,7 +22,7 @@ project_root/
 
 ### 1. Dataset Setup
 
-- Download the **UCID dataset** (e.g., from [here](https://www.essex.ac.uk/news/2010/12/20/ucid-an-image-database)).
+- Download the **UCID dataset** (e.g., from [here](https://github.com/girfa/ColorImageDatasets)).
 - Place it **outside** the project root directory like so:
 
 ```
@@ -31,16 +33,7 @@ project_root/
 
 ### 2. Install Python Dependencies
 
-Create a `requirements.txt` with the following:
-
-```txt
-numpy
-scipy
-scikit-learn
-matplotlib
-```
-
-Then install using:
+Install using:
 
 ```bash
 pip install -r requirements.txt
