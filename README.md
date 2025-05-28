@@ -3,6 +3,9 @@
 This project performs error analysis on JPEG-compressed images using the UCID dataset. It identifies rounding and truncation errors in DCT coefficients, processes them, and trains a Support Vector Machine (SVM) model for classification of iamges as double or simple compressed.
 
 ---
+ 
+[Demo Video Link](https://drive.google.com/file/d/1vbWHRaWgYg4m738mgKhVOpNqpbUBxr0F/view?usp=drive_link)
+
 
 ## 📁 Folder Structure
 
